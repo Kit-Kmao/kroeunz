@@ -47,15 +47,16 @@
     .stu-list {
         color: #152550;
     }
-    .btnhover1:hover{
+
+    .btnhover1:hover {
         background: #5b6684;
         color: #fff;
     }
-    .bimg{
+
+    .bimg {
         border-top: 1px solid #5b6684;
         border-bottom: 1px solid #5b6684;
     }
-    
     </style>
 </head>
 
@@ -74,7 +75,8 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link " data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="font-size:23px;"></i></a>
+                    <a class="nav-link " data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"
+                            style="font-size:23px;"></i></a>
                 </li>
                 <!-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="index3.html" class="nav-link">Home</a>
@@ -216,7 +218,7 @@
                     <div class="position-relative">
                         <div class="dropdown-menu droppdown-menu-right mt-2">
                             <a href="#" class="dropdown-item text-dark">view Profile</a>
-                            <a class="dropdown-item" href="logout.php"><span>Logout</span></a>
+                            <a class="dropdown-item" href="login_role.php"><span>Logout</span></a>
                         </div>
                     </div>
                 </li>
@@ -274,11 +276,11 @@
                                 </p>
                             </a>
                         </li>
-                            <li class="nav-item">
+                        <li class="nav-item">
                             <a href="score.php" class="nav-link btnhover1">
                                 <i class="nav-icon far fa-chart-bar"></i>
                                 <p>
-                                Scores
+                                    Scores
                                 </p>
                             </a>
                         </li>
@@ -307,7 +309,7 @@
                                 </p>
                             </a>
                         </li>
-            
+
                         <li class="nav-item">
                             <a href="classroom.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-light fa-warehouse"></i>
@@ -332,18 +334,20 @@
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview ml-4" style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                            <ul class="nav nav-treeview ml-4"
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="" class="nav-link ">
-                                        
+
                                         <p class="stu-list text-white ml-2">Teacher Schedule</p>
-                                    </a> 
+                                    </a>
                                 </li>
                             </ul>
-                            <ul class="nav nav-treeview ml-4" style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                            <ul class="nav nav-treeview ml-4"
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="class_for_sch.php" class="nav-link ">
-                                        
+
                                         <p class="stu-list text-white ml-2">Student Schedule</p>
                                     </a>
                                 </li>
@@ -366,21 +370,24 @@
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview ml-4" style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                            <ul class="nav nav-treeview ml-4"
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
-                                    <a href="user_info.php" class="nav-link"> 
+                                    <a href="user_info.php" class="nav-link">
                                         <p class="stu-list text-white ml-2">User Info</p>
                                     </a>
                                 </li>
                             </ul>
-                            <ul class="nav nav-treeview ml-4" style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                            <ul class="nav nav-treeview ml-4"
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="" class="nav-link ">
                                         <p class="stu-list text-white ml-2">Backup</p>
                                     </a>
                                 </li>
                             </ul>
-                            <ul class="nav nav-treeview ml-4 mb-5" style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                            <ul class="nav nav-treeview ml-4 mb-5"
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="logout.php" class="nav-link ">
                                         <p class="stu-list text-white ml-2">Logout</p>
