@@ -1,5 +1,5 @@
 <?php
-include 'connection.php';
+include 'connection.php';  
 ?>
 
 <!DOCTYPE html>
@@ -188,13 +188,46 @@ include 'connection.php';
                         </li>
 
                         <li class="nav-item">
+                            <a href="#" class="nav-link btnhover1">
+                                <i class="nav-icon fas fa-warehouse"></i>
+                                <p>
+                                    Classrooms
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview ml-4"
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                                <li class="nav-item">
+                                    <a href="classroom.php" class="nav-link">
+                                        <p class="stu-list text-white ml-2">All Classrooms</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview ml-4"
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                                <li class="nav-item">
+                                    <a href="class.php" class="nav-link ">
+                                        <p class="stu-list text-white ml-2">Add Student to Class</p>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        <!-- <li class="nav-item">
                             <a href="classroom.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-light fa-warehouse"></i>
                                 <p>
                                     Classrooms
                                 </p>
                             </a>
-                        </li>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <a href="class.php" class="nav-link btnhover1">
+                                <i class="nav-icon fas fa-light fa-users-cog"></i>
+                                <p>
+                                    Add Student to Class
+                                </p>
+                            </a>
+                        </li> -->
                         <li class="nav-item">
                             <a href="teacher_list.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-user-tie"></i>
