@@ -3,12 +3,29 @@ include 'connection.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+// 
+$sql = "SELECT * FROM tb_class ";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$class = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$sql = "SELECT * FROM tb_student ";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$student = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $sql = "SELECT * FROM tb_add_to_class atc JOIN tb_class c ON c.ClassID = atc.Class_id JOIN tb_student stu ON stu.ID = atc.Stu_id WHERE atc.id";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-$class = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$joinclass = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+if (isset($_POST['btnsave'])) {
+    $sql = "INSERT INTO tb_add_to_class(Stu_id,Class_id) VALUES(:Stu_id,:Class_id)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":Stu_id", $_POST['addstu'], PDO::PARAM_STR);
+    $stmt->bindParam(":Class_id", $_POST['addclass'], PDO::PARAM_STR);
+    $stmt->execute();
+}
 
 
 
@@ -24,9 +41,7 @@ if ($temp) {
     $maxpage = ceil($temp['CountRecords'] / 10);
 }
 ?>
-
 <?php include_once 'header.php'; ?>
-
 <section class="content-wrapper">
     <div class="container-fluid">
         <div class="row mb-2 card-header">
@@ -37,7 +52,6 @@ if ($temp) {
             </div>
             <div class="col-sm-6">
                 <h3 class="card-title float-sm-right">
-                    
                 </h3>
             </div>
         </div>
@@ -51,14 +65,12 @@ if ($temp) {
                         <div class="col-md-8">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <label for="inputName">Student Name:</label>
-                                    <select name="" id="" class="form-control">
-                                        <option value="">Select Student</option>
-                                        <?php foreach ($data as $key => $value) { ?>
-                                        <option value="<?php echo $value['ID']; ?>">
-                                            <?php echo $value['En_name']; ?>
-                                        </option>
-                                        <?php } ?>
+                                    <!-- <label for="inputName">Class Name:</label> -->
+                                    <select name="addclass" id="" class="form-control">
+                                        <option value="">--Select Class--</option>
+                                        <?php foreach ($class as $row) : ?>
+                                        <option value="<?= $row['ClassID']; ?>"><?= $row['Class_name']; ?></option>
+                                        <?php endforeach; ?>
                                     </select>
 
                                     <div class="ml-3">
@@ -76,62 +88,56 @@ if ($temp) {
                             </div>
                         </div>
                     </div>
-                </form>
 
-
-                <!-- <div class="card-tools">
-                        <div class="form-group" style="width: 300px;">
-                            <input type="text" id="" name="namesearch" class="search form-control float-right"
-                                placeholder="Search" style="font-family:Khmer OS Siemreap;">
-                            <div class=" input-group-append">
-                            </div>
-                        </div>
-                    </div> -->
             </div>
 
             <div class="card-body table-responsive p-0 text-sm">
                 <table class="table table-hover text-nowrap" style="font-family:Khmer OS Siemreap;" id="userTbl">
                     <thead>
                         <tr>
+                            <th>Check</th>
                             <th>No</th>
-                            <th>Class Name</th>
+                            <th>Student Code</th>
                             <th>English Name</th>
                             <th>Khmer Name</th>
-                            <th>Student Code</th>
                             <th>Gender</th>
-                            <th>Date of Birth</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="showdata">
-                        <?php if (isset($data)) { ?>
-                        <?php foreach ($data as $key => $value) { ?>
+                        <?php if (isset($student)) { ?>
+                        <?php foreach ($student as $key => $value) { ?>
                         <tr>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="checkbox" name="addstu" value="<?php echo $value['ID']; ?>"
+                                        id="check1">
+                                    <label for="check1"></label>
+                                </div>
+                            </td>
                             <td><?php
                                         if (isset($_GET['page']) && $_GET['page'] > 1)
                                             echo ($_GET['page'] - 1) * 10 + ($key + 1);
                                         else
                                             echo ($key + 1);
                                         ?></td>
-
-                            <td><?php echo $value['Class_name']; ?></td>
+                            <td><?php echo $value['Stu_code']; ?></td>
                             <td><?php echo $value['En_name']; ?></td>
                             <td><?php echo $value['Kh_name']; ?></td>
-                            <td><?php echo $value['Stu_code']; ?></td>
                             <td><?php echo $value['Gender']; ?></td>
-                            <td><?php echo $value['DOB']; ?></td>
-                            <td>
-                                <a class="m-2" href="all_condition.php?remove_cid=<?php echo $value['id'] ?>"
+                            <!-- <td>
+                                <a class="m-2" href="all_condition.php?remove_cid=<?php echo $value['ID'] ?>"
                                     onclick="return confirm('Do you want to delete this record?')">
                                     <i class="fa fa-trash text-danger"></i>
                                 </a>
-                            </td>
+                            </td> -->
                         </tr>
                         <?php } ?>
                         <?php } ?>
                     </tbody>
                 </table>
             </div>
+            </form>
 
         </div>
     </div>
