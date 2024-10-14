@@ -23,7 +23,7 @@ FROM
 INNER JOIN 
     tb_course co ON c.Course_id = co.id
 INNER JOIN 
-    tb_teacher t ON c.Teacher_id = t.id";
+    tb_teacher t ON c.Teacher_id = t.id ORDER BY Class_name  ASC";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $Class = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -31,18 +31,18 @@ $Class = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 //insert Class
 if (isset($_POST['btnsave'])) {
-    $sql = "INSERT INTO tb_class(Class_name,Class_Type,Teacher_id,Course_id,Time_in,Time_out,Shift,Start_class,End_class)
-    VALUES(:Class_name,:Class_Type,:Teacher_id,:Course_id,:Time_in,:Time_out,:Shift,:Start_class,:End_class)";
+    $sql = "INSERT INTO tb_class(Class_name,Teacher_id,course_id,Time_in,Time_out,Shift,Start_class,End_class)
+    VALUES(:Class_name,:Teacher_id,:co,:Time_in,:Time_out,:Shift,:Start_class,:End_class)";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":Class_name", $_POST['class_name'], PDO::PARAM_STR);
-    $stmt->bindParam(":Class_Type", $_POST['class_type'], PDO::PARAM_STR);
-    $stmt->bindParam(":Teacher_id", $_POST['course_name'], PDO::PARAM_INT);
-    $stmt->bindParam(":Course_id", $_POST['teacher_name'], PDO::PARAM_INT);
+    $stmt->bindParam(":Teacher_id", $_POST['teacher_name'], PDO::PARAM_INT);
+    $stmt->bindParam(":co", $_POST['co'], PDO::PARAM_INT);
     $stmt->bindParam(":Time_in", $_POST['time_in'], PDO::PARAM_STR);
     $stmt->bindParam(":Time_out", $_POST['time_out'], PDO::PARAM_STR);
     $stmt->bindParam(":Shift", $_POST['shift'], PDO::PARAM_STR);
     $stmt->bindParam(":Start_class", $_POST['start_class'], PDO::PARAM_STR);
     $stmt->bindParam(":End_class", $_POST['end_class'], PDO::PARAM_STR);
+    // $stmt->bindParam(":Course_id", $_POST['course_name'], PDO::PARAM_INT);
     $stmt->execute();
 
     if ($stmt->rowCount()) {
@@ -117,32 +117,38 @@ if (isset($GET['class_id'])) {
                                     <label for="inputName">Class Name</label>
                                     <input type="text" id="" name="class_name" class="form-control" value="">
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="inputName">Class Type</label>
-                                        <input type="text" id="" name="class_type" class="form-control" value="">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="inputName">Course Name</label>
                                         <select name="course_name" id="" class="form-control">
                                             <option selected disabled value="">Select Course</option>
                                             <?php foreach ($Course as $row) { ?>
-                                                <option class="form-control" value="<?php echo $row['id']; ?>">
-                                                    <?php echo $row['Course_name']; ?></option>
+                                            <option class="form-control" value="<?php echo $row['id']; ?>">
+                                                <?php echo $row['Course_name']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div> -->
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="inputName">Teacher Name</label>
+                                        <select name="teacher_name" id="" class="form-control">
+                                            <option selected disabled value="">Select Teacher</option>
+                                            <?php foreach ($Teacher as $row) { ?>
+                                            <option class="form-control" value="<?php echo $row['id']; ?>">
+                                                <?php echo $row['En_name']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="inputName">Teacher Name</label>
-                                        <select name="teacher_name" id="" class="form-control">
-                                            <?php foreach ($Teacher as $row) { ?>
-                                                <option selected disabled value="">Select Teacher</option>
-                                                <option class="form-control" value="<?php echo $row['id']; ?>">
-                                                    <?php echo $row['En_name']; ?></option>
+                                        <label for="inputName">Course Name</label>
+                                        <select name="co" id="" class="form-control">
+                                            <option selected disabled value="">Select Course</option>
+                                            <?php foreach ($Course as $row) { ?>
+                                            <option class="form-control" value="<?php echo $row['id']; ?>">
+                                                <?php echo $row['Course_name']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -224,9 +230,9 @@ if (isset($GET['class_id'])) {
                             <tr>
                                 <th>No</th>
                                 <th>Class Name</th>
-                                <th>Class Type</th>
-                                <th>Course Name</th>
+                                <!-- <th>Course Name</th> -->
                                 <th>Teacher Name</th>
+                                <th>Course Name</th>
                                 <th>Time In</th>
                                 <th>Time Out</th>
                                 <th>Start Class</th>
@@ -237,41 +243,40 @@ if (isset($GET['class_id'])) {
                         </thead>
                         <tbody id="showdata">
                             <?php if (isset($Class)) { ?>
-                                <?php foreach ($Class as $key => $value) { ?>
-                                    <tr>
-                                        <td><?php
+                            <?php foreach ($Class as $key => $value) { ?>
+                            <tr>
+                                <td><?php
                                             if (isset($_GET['page']) && $_GET['page'] > 1)
                                                 echo ($_GET['page'] - 1) * 10 + ($key + 1);
                                             else
                                                 echo ($key + 1);
                                             ?></td>
 
-                                        <td><?php echo $value['Class_name']; ?></td>
-                                        <td><?php echo $value['Class_Type']; ?></td>
-                                        <td><?php echo $value['Course_name']; ?></td>
-                                        <td><?php echo $value['En_name']; ?></td>
-                                        <td><?php echo $value['Time_in']; ?></td>
-                                        <td><?php echo $value['Time_out']; ?></td>
-                                        <td><?php echo $value['Start_class']; ?></td>
-                                        <td><?php echo $value['End_class']; ?></td>
-                                        <!-- <td><?php echo date('d-M-Y', strtotime($value['Start_class '])); ?></td>
+                                <td><?php echo $value['Class_name']; ?></td>
+                                <td><?php echo $value['En_name']; ?></td>
+                                <td><?php echo $value['Course_name']; ?></td>
+                                <td><?php echo $value['Time_in']; ?></td>
+                                <td><?php echo $value['Time_out']; ?></td>
+                                <td><?php echo $value['Start_class']; ?></td>
+                                <td><?php echo $value['End_class']; ?></td>
+                                <!-- <td><?php echo date('d-M-Y', strtotime($value['Start_class '])); ?></td>
                                 <td><?php echo date('d-M-Y', strtotime($value['End_class '])); ?></td> -->
-                                        <td><?php echo $value['Shift']; ?></td>
-                                        <td>
-                                            <a href="" data-toggle="modal" data-target="#modal-lg">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a class="m-2" href="all_condition.php?class_id=<?php echo $value['ClassID'] ?>"
-                                                onclick="return confirm('Do you want to delete this record?')">
-                                                <i class="fa fa-trash text-danger"></i>
-                                            </a>
-                                            <a href="classroom.php?class_id=<?php echo $value['ClassID'] ?>">
-                                                <i class="nav-icon fas fa-ellipsis-h"></i>
-                                            </a>
-                                        </td>
+                                <td><?php echo $value['Shift']; ?></td>
+                                <td>
+                                    <a href="" data-toggle="modal" data-target="#modal-lg">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a class="m-2" href="all_condition.php?class_id=<?php echo $value['ClassID'] ?>"
+                                        onclick="return confirm('Do you want to delete this record?')">
+                                        <i class="fa fa-trash text-danger"></i>
+                                    </a>
+                                    <a href="classroom.php?class_id=<?php echo $value['ClassID'] ?>">
+                                        <i class="nav-icon fas fa-ellipsis-h"></i>
+                                    </a>
+                                </td>
 
-                                    </tr>
-                                <?php } ?>
+                            </tr>
+                            <?php } ?>
                             <?php } ?>
                         </tbody>
                     </table>
@@ -290,7 +295,7 @@ if (isset($GET['class_id'])) {
                         ?>
                     ">&laquo;</a></li>
                             <?php for ($i = 1; $i <= $maxpage; $i++) { ?>
-                                <li class="page-item
+                            <li class="page-item
                       <?php
                                 if (isset($_GET['page'])) {
                                     if ($i == $_GET['page'])
@@ -300,7 +305,7 @@ if (isset($GET['class_id'])) {
                                         echo ' active ';
                                 }
                         ?>"><a class="page-link" href="classroom.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                </li>
+                            </li>
                             <?php } ?>
                             <li class="page-item"><a class="page-link" href="classroom.php?page=
                      <?php
