@@ -5,10 +5,10 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 
-$sql = "SELECT * FROM tb_add_to_class atc JOIN tb_class c ON c.ClassID = atc.Class_id JOIN tb_student stu ON stu.ID = atc.Stu_id WHERE atc.id";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$class = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// $sql = "SELECT * FROM tb_add_to_class atc JOIN tb_class c ON c.ClassID = atc.Class_id JOIN tb_student stu ON stu.ID = atc.Stu_id WHERE atc.id";
+// $stmt = $conn->prepare($sql);
+// $stmt->execute();
+// $class = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 // $sql = "SELECT * FROM tb   _class atc JOIN tb_class c ON c.ClassID = atc.Class_id JOIN tb_student stu ON stu.ID = atc.Stu_id WHERE atc.id";
@@ -59,7 +59,7 @@ if ($temp) {
                                 <div class="input-group">
                                     <select name="" id="" class="form-control">
                                         <option value="">Select Class</option>
-                                        
+
                                     </select>
                                 </div>
                             </div>

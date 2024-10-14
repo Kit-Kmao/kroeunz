@@ -206,11 +206,7 @@ include 'connection.php';
                             <ul class="nav nav-treeview ml-4"
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
-<<<<<<< HEAD
                                     <a href="student_in_class.php" class="nav-link">
-=======
-                                    <a href="Student_in_class.php" class="nav-link">
->>>>>>> 8d7c4bea538962ff8067d6c901b9211a609bf4ab
                                         <p class="stu-list text-white ml-2">Student in Class</p>
                                     </a>
                                 </li>
