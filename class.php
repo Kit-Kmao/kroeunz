@@ -4,19 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// $sql = "SELECT * FROM tb_add_to_class, tb_class, tb_student;";
-// $stmt = $conn->prepare($sql);
-// $stmt->execute();
-// $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-// if ($_GET['class_id']) {
-//     $class_id = $_GET['class_id'];
-//     $sql = "SELECT * FROM tb_add_to_class atc JOIN tb_class c ON c.ClassID = atc.Class_id JOIN tb_student stu ON stu.ID = atc.Stu_id WHERE atc.id=$class_id";
-//     $stmt = $conn->prepare($sql);
-//     $stmt->execute();
-//     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// }
 
 $sql = "SELECT * FROM tb_add_to_class atc JOIN tb_class c ON c.ClassID = atc.Class_id JOIN tb_student stu ON stu.ID = atc.Stu_id WHERE atc.id";
 $stmt = $conn->prepare($sql);
@@ -44,17 +31,13 @@ if ($temp) {
     <div class="container-fluid">
         <div class="row mb-2 card-header">
             <div class="col-sm-6">
-                <?php foreach ($data as $key => $value) { ?>
                 <h3 class="m-0" style="font-family:Khmer OS Siemreap; color:#152550;">
-                    |Student in <?php echo $value['Class_name']; ?> <?php echo $value['Class_Type']; ?>
+                    |Class
                 </h3>
-                <?php } ?>
             </div>
             <div class="col-sm-6">
                 <h3 class="card-title float-sm-right">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-lg">
-                        Add
-                    </button>
+                    
                 </h3>
             </div>
         </div>
