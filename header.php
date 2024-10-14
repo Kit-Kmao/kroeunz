@@ -258,7 +258,7 @@ include 'connection.php';
                             <ul class="nav nav-treeview ml-4"
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link ">
+                                    <a href="backup_database.php" class="nav-link ">
                                         <p class="stu-list text-white ml-2">Backup</p>
                                     </a>
                                 </li>
