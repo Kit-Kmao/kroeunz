@@ -217,7 +217,7 @@
                     <span class="name_user text-dark"><?php echo $_SESSION["user"]; ?></span>
                     <div class="position-relative">
                         <div class="dropdown-menu droppdown-menu-right mt-2">
-                            <a href="#" class="dropdown-item text-dark">view Profile</a>
+                            <a href="#" class="dropdown-item text-dark">Profile</a>
                             <a class="dropdown-item" href="login_role.php"><span>Logout</span></a>
                         </div>
                     </div>
