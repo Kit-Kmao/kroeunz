@@ -22,5 +22,6 @@ system($gzip_command);
 $find_command = "find " . BK_DIR . " -type f -name '*.gz' -mtime +7 -delete";
 system($find_command);
 
+echo '<script>alert("Do you want to backup database?")</script>';
 header("Location: index.php");
 exit;
