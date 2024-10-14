@@ -162,7 +162,7 @@ if (isset($_GET['stu_id'])) {
                         <input type="file" name="image" class="form-control" value="<?= $file_name; ?>"
                             accept="images/**" onchange="preview (event)">
                         <div style="margin-top: 9px">
-                            <img src=" " alt="" id="img" width="200">
+                            <img src="images/<?= $file_name; ?>" alt="" id="img" width="200">
                         </div>
 
                     </div>
