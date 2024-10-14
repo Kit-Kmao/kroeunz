@@ -89,7 +89,7 @@ include 'connection.php';
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
 
-                <li class="mr-2" data-toggle="dropdown">
+                <!-- <li class="mr-2" data-toggle="dropdown">
                     <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" width="40" height="40">
                     <span class="name_user text-dark"><?php echo $_SESSION["user"]; ?></span>
                     <div class="position-relative">
@@ -98,7 +98,7 @@ include 'connection.php';
                             <a href="logout.php" class="dropdown-item text-dark">Logout</a>
                         </div>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -200,6 +200,14 @@ include 'connection.php';
                                 <li class="nav-item">
                                     <a href="classroom.php" class="nav-link">
                                         <p class="stu-list text-white ml-2">All Classrooms</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview ml-4"
+                                style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                                <li class="nav-item">
+                                    <a href="student_in_class.php" class="nav-link">
+                                        <p class="stu-list text-white ml-2">Student in Class</p>
                                     </a>
                                 </li>
                             </ul>
