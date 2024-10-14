@@ -275,7 +275,10 @@ if ($temp) {
                                 <td><?php echo date('d-M-Y', strtotime($value['DOB'])); ?></td>
                                 <td><?php echo $value['Address']; ?></td>
                                 <td><?php echo $value['Phone']; ?></td>
-                                <td><?php echo $value['Status']; ?></td>
+                                <?php if ($value['Status'] == 'Active') : ?>
+                                <td class="badge badge-success mt-3 pt-1 pb-1">
+                                    <?php echo $value['Status']; ?></td>
+                                <?php endif; ?>
                                 <td>
                                     <a href="update_student.php?stu_id=<?php echo $value['ID'] ?>">
                                         <i class="fa fa-edit text-success"></i>

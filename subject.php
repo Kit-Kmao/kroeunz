@@ -129,10 +129,10 @@ if (isset($_POST['btnsave'])) {
                         </div>
                         <div class="d-flex justify-content-between small-box-footer">
                             <div>
-                                <a href="course.php?subject_id=<?php echo $row['SubID'] ?>" class="text-white ml-3">
+                                <!-- <a href="" class="text-white ml-3">
                                     View &nbsp;
                                     <i class="fas fa-arrow-right fa-xs"></i>
-                                </a>
+                                </a> -->
                             </div>
                             <div class="mr-3 dropup">
                                 <i class="nav-icon fas fa-ellipsis-h text-white" data-toggle="dropdown"></i>
