@@ -5,7 +5,7 @@ define('DB_PASS', '');
 define('DB_NAME', 'db_students');
 
 //Backup Directory
-define('BK_DIR', 'C://xampp//htdocs//SmartBright-International-School//SmartBright-International-School//backup_file');
+define('BK_DIR', 'C://xampp//htdocs//kroeunz//backup_file');
 
 //Create backup file
 $date = date('Y-m-d_H-i-s');
@@ -22,6 +22,5 @@ system($gzip_command);
 $find_command = "find " . BK_DIR . " -type f -name '*.gz' -mtime +7 -delete";
 system($find_command);
 
-echo '<script>alert("Do you want to backup database?")</script>';
 header("Location: index.php");
 exit;
