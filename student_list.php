@@ -35,22 +35,20 @@ if (isset($_POST['btnsave'])) {
     $file_name = $_FILES['image']['name'];
     $tempname = $_FILES['image']['tmp_name'];
     $folder = 'images/' . $file_name;
-    $sql = "INSERT INTO tb_student(Stu_code,En_name,Kh_name,DOB,Address,Level,Unit,Time,Dad_name,Mom_name,Dad_job,Mom_job,Phone,Profile_img) 
-    VALUES(:stucode,:En_name, :Kh_name, :DOB, :Address, :Level, :Unit, :Time, :Dad_name, :Mom_name, :Dad_job, :Mom_job, :Phone,:Profile_img)";
+    $sql = "INSERT INTO tb_student(Stu_code,En_name,Kh_name,DOB,Address,Dad_name,Mom_name,Dad_job,Mom_job,Phone,Profile_img,Status) 
+    VALUES(:stucode,:En_name, :Kh_name, :DOB, :Address, :Dad_name, :Mom_name, :Dad_job, :Mom_job, :Phone,:Profile_img,:Status)";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":stucode", $_POST['studentcode'], PDO::PARAM_STR);
     $stmt->bindParam(":En_name", $_POST['en_name'], PDO::PARAM_STR);
     $stmt->bindParam(":Kh_name", $_POST['kh_name'], PDO::PARAM_STR);
     $stmt->bindParam(":DOB", $_POST['dob'], PDO::PARAM_STR);
     $stmt->bindParam(":Address", $_POST['address'], PDO::PARAM_STR);
-    $stmt->bindParam(":Level", $_POST['level'], PDO::PARAM_STR);
-    $stmt->bindParam(":Unit", $_POST['unit'], PDO::PARAM_STR);
-    $stmt->bindParam(":Time", $_POST['time'], PDO::PARAM_STR);
     $stmt->bindParam(":Dad_name", $_POST['dad_name'], PDO::PARAM_STR);
     $stmt->bindParam(":Mom_name", $_POST['mom_name'], PDO::PARAM_STR);
     $stmt->bindParam(":Dad_job", $_POST['dad_job'], PDO::PARAM_STR);
     $stmt->bindParam(":Mom_job", $_POST['mom_job'], PDO::PARAM_STR);
     $stmt->bindParam(":Phone", $_POST['phone'], PDO::PARAM_STR);
+    $stmt->bindParam(":Status", $_POST['status'], PDO::PARAM_STR);
     $stmt->bindParam(":Profile_img", $file_name, PDO::PARAM_STR);
     $stmt->execute();
     if ($stmt->rowCount()) {
@@ -62,8 +60,6 @@ if (isset($_POST['btnsave'])) {
         echo "Failed to upload image";
     }
 }
-
-
 
 //pages
 $sql  = "SELECT COUNT(*) AS CountRecords FROM tb_student";
@@ -84,7 +80,8 @@ if ($temp) {
     <div class="container-fluid">
         <div class="row mb-2 card-header">
             <div class="col-sm-6">
-                <h1 class="m-0">|Student Lists</h1>
+                <h3 class="m-0" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                    |Student Lists</h3>
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
@@ -100,12 +97,6 @@ if ($temp) {
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <?php if (isset($_GET['ID'])) { ?>
-                        <h3 class="card-title" style="color:chocolate;">Edit Student</h3>
-                    <?php } else { ?>
-
-                        <h3 class="card-title" style="color:chocolate;">Add Student</h3>
-                    <?php  } ?> -->
                     <h4>|Insert Student</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -114,27 +105,28 @@ if ($temp) {
                 <!-- Condition to Add or Edit student -->
 
                 <!-- form add and edit student -->
-                <form name="studentform" method="post" action="" enctype="multipart/form-data">
+                <form name="studentform" method="post" action="" enctype="multipart/form-data"
+                    style="font-family: Khmer OS Siemreap;">
                     <div class="card-body">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="">Student Code</label>
                                     <input type="text" name="studentcode" id="studentcode" class="form-control">
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="inputName">English Name</label>
                                     <input type="text" id="enName" name="en_name" class="form-control" value="">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="inputName">Khmer Name</label>
                                         <input type="text" id="khName" name="kh_name" class="form-control" value="">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="inputStatus">Gender</label>
                                         <select id="inputStatus" name="gender" class="form-control custom-select">
@@ -144,19 +136,21 @@ if ($temp) {
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="inputDateOfBirth">Date Of Birth</label>
                                         <input type="date" id="inputDateOfBirth" name="dob" class="form-control"
                                             value="">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
+
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="pob">Place Of Birth</label>
-                                        <input type="date" id="inputDOB" name="pob" class="form-control" value="">
+                                        <label for="status">Status</label>
+                                        <select name="status" id="status" class="form-control">
+                                            <option value="Active">Active</option>
+                                            <option value="Deactive">Deactive</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +177,7 @@ if ($temp) {
                         </div>
                         <div class="form-group">
                             <label for="inputDescription">Address</label>
-                            <textarea id="inputDescription" name="address" class="form-control" rows="4"></textarea>
+                            <textarea id="inputDescription" name="address" class="form-control" rows="2"></textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -258,43 +252,43 @@ if ($temp) {
                         </thead>
                         <tbody id="showdata">
                             <?php foreach ($data as $key => $value) { ?>
-                                <tr>
-                                    <td><?php
+                            <tr>
+                                <td><?php
                                         if (isset($_GET['page']) && $_GET['page'] > 1)
                                             echo ($_GET['page'] - 1) * 10 + ($key + 1);
                                         else
                                             echo ($key + 1);
                                         ?></td>
-                                    <td>
-                                        <div class="user-panel">
-                                            <div class="image">
-                                                <img onerror="this.style.display = 'none'" class="img-circle"
-                                                    src="images/<?= $value['Profile_img']; ?>"
-                                                    style="width: 35px; height: 35px;" />
-                                            </div>
+                                <td>
+                                    <div class="user-panel">
+                                        <div class="image">
+                                            <img onerror="this.style.display = 'none'" class="img-circle"
+                                                src="images/<?= $value['Profile_img']; ?>"
+                                                style="width: 35px; height: 35px;" />
                                         </div>
-                                    </td>
-                                    <td><?php echo $value['Stu_code']; ?></td>
-                                    <td><?php echo $value['En_name']; ?></td>
-                                    <td><?php echo $value['Kh_name']; ?></td>
-                                    <td><?php echo $value['Gender']; ?></td>
-                                    <td><?php echo date('d-M-Y', strtotime($value['DOB'])); ?></td>
-                                    <td><?php echo $value['Address']; ?></td>
-                                    <td><?php echo $value['Phone']; ?></td>
-                                    <td><?php echo $value['Status']; ?></td>
-                                    <td>
-                                        <a href="update_student.php?stu_id=<?php echo $value['ID'] ?>">
-                                            <i class="fa fa-edit text-success"></i>
-                                        </a>
-                                        <a class="m-2" href="all_condition.php?stu_id=<?php echo $value['ID'] ?>"
-                                            onclick="return confirm('Do you want to delete this record?')">
-                                            <i class="fa fa-trash text-danger"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="nav-icon fas fa-ellipsis-h"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                    </div>
+                                </td>
+                                <td><?php echo $value['Stu_code']; ?></td>
+                                <td><?php echo $value['En_name']; ?></td>
+                                <td><?php echo $value['Kh_name']; ?></td>
+                                <td><?php echo $value['Gender']; ?></td>
+                                <td><?php echo date('d-M-Y', strtotime($value['DOB'])); ?></td>
+                                <td><?php echo $value['Address']; ?></td>
+                                <td><?php echo $value['Phone']; ?></td>
+                                <td><?php echo $value['Status']; ?></td>
+                                <td>
+                                    <a href="update_student.php?stu_id=<?php echo $value['ID'] ?>">
+                                        <i class="fa fa-edit text-success"></i>
+                                    </a>
+                                    <a class="m-2" href="all_condition.php?stu_id=<?php echo $value['ID'] ?>"
+                                        onclick="return confirm('Do you want to delete this record?')">
+                                        <i class="fa fa-trash text-danger"></i>
+                                    </a>
+                                    <a href="#">
+                                        <i class="nav-icon fas fa-ellipsis-h"></i>
+                                    </a>
+                                </td>
+                            </tr>
                             <?php } ?>
                         </tbody>
                     </table>
@@ -313,7 +307,7 @@ if ($temp) {
                         ?>
                     ">&laquo;</a></li>
                             <?php for ($i = 1; $i <= $maxpage; $i++) { ?>
-                                <li class="page-item
+                            <li class="page-item
                       <?php
                                 if (isset($_GET['page'])) {
                                     if ($i == $_GET['page'])
@@ -323,7 +317,7 @@ if ($temp) {
                                         echo ' active ';
                                 }
                         ?>"><a class="page-link" href="student_list.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                </li>
+                            </li>
                             <?php } ?>
                             <li class="page-item"><a class="page-link" href="student_list.php?page=
                      <?php
