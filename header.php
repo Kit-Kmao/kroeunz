@@ -47,6 +47,15 @@
     .stu-list {
         color: #152550;
     }
+    .btnhover1:hover{
+        background: #5b6684;
+        color: #fff;
+    }
+    .bimg{
+        border-top: 1px solid #5b6684;
+        border-bottom: 1px solid #5b6684;
+    }
+    
     </style>
 </head>
 
@@ -65,7 +74,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link " data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="font-size:23px;"></i></a>
                 </li>
                 <!-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="index3.html" class="nav-link">Home</a>
@@ -201,36 +210,16 @@
                     </a>
                 </li> -->
 
-
-                <!-- user-panel p-1 d-flex border border-white bg-success pb-3 pt-2 mb-1 -->
-                <div class="pb-3 pt-2 mb-2 px-2" style="background-color: rgb(21, 37, 80);">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" width="40"
-                            height="40">
-                        <span class="name_user text-white"><?php echo $_SESSION["user"]; ?></span>
-                    </a>
+                <li class="mr-2" data-toggle="dropdown">
+                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" width="40" height="40">
+                    <span class="name_user text-dark"><?php echo $_SESSION["user"]; ?></span>
                     <div class="position-relative">
-                        <div class="dropdown-menu droppdown-menu-right m-0">
-                            <a href="#" class="dropdown-item text-dark">Profile</a>
-                            <a class="dropdown-item" href="logout.php"><span>Log Out</span></a>
+                        <div class="dropdown-menu droppdown-menu-right mt-2">
+                            <a href="#" class="dropdown-item text-dark">view Profile</a>
+                            <a class="dropdown-item" href="logout.php"><span>Logout</span></a>
                         </div>
                     </div>
-                </div>
-                <!--  -->
-                <!-- <li style="background-color: rgb(21, 37, 80);">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        <img class="img-responsive rounded-circle" src="images/SiSlogo.png" alt="#" width="30"
-                            height="30" />
-                        <span class="name_user text-white"><?php echo $_SESSION["user"]; ?></span>
-                    </a>
-                    <div class="position-relative">
-                        <div class="dropdown-menu droppdown-menu-right m-0">
-                            <a class="dropdown-item" href="#">My Profile</a>
-                            <a class="dropdown-item" href="logout.php"><span>Log Out</span></a>
-                        </div>
-                    </div
-
-                </li> -->
+                </li>
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -249,45 +238,28 @@
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="user-panel mb-3 d-flex bimg pt-2 pb-2">
                     <div class="image">
                         <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block text-white">
+                            <!-- <?= $_SESSION["user"]; ?> -->
                             <?php echo $_SESSION["user"] ?>
                         </a>
                     </div>
                 </div>
                 <!-- Sidebar Menu -->
 
-                <nav class="mt-2">
+                <nav class="mt-1">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-                        <?php if ($_SESSION['role'] == 'user') : ?>
+
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Attendance
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Score
-                                </p>
-                            </a>
-                        </li>
-                        <?php endif; ?>
-                        <?php if ($_SESSION['role'] == 'admin') : ?>
-                        <li class="nav-item">
-                            <a href="index.php" class="nav-link">
+                            <a href="index.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Dashboard
@@ -295,64 +267,57 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="student_list.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    Students
-                                    <i class="fas fa-angle-left right"></i>
+                                    Students information
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview" style="background-color:#fff;">
-                                <li class="nav-item">
-                                    <a href="student_list.php" class="nav-link ">
-                                        <i class="far fa-circle nav-icon stu-list"></i>
-                                        <p class="stu-list">Student Lists</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview" style="background-color:#fff;">
-                                <li class="nav-item">
-                                    <a href="score.php" class="nav-link ">
-                                        <i class="far fa-circle nav-icon stu-list"></i>
-                                        <p class="stu-list">Scores</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview" style="background-color:#fff;">
-                                <li class="nav-item">
-                                    <a href="attendance.php" class="nav-link ">
-                                        <i class="far fa-circle nav-icon stu-list"></i>
-                                        <p class="stu-list">Attendance</p>
-                                    </a>
-                                </li>
-                            </ul>
+                        </li>
+                            <li class="nav-item">
+                            <a href="score.php" class="nav-link btnhover1">
+                                <i class="nav-icon far fa-chart-bar"></i>
+                                <p>
+                                Scores
+                                </p>
+                            </a>
+                        </li>
                         </li>
                         <li class="nav-item">
-                            <a href="subject.php" class="nav-link">
-                                <i class="nav-icon fas fa-book-open"></i>
+                            <a href="score.php" class="nav-link btnhover1">
+                                <i class="nav-icon fas fa-tasks"></i>
+                                <p>
+                                    Attendace
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="subject.php" class="nav-link btnhover1">
+                                <i class="nav-icon fas fa-graduation-cap"></i>
                                 <p>
                                     Subjects
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="tbl_course.php" class="nav-link">
-                                <i class="nav-icon fas fa-book-open"></i>
+                            <a href="tbl_course.php" class="nav-link btnhover1">
+                                <i class="nav-icon fas fa-book"></i>
                                 <p>
                                     Course
                                 </p>
                             </a>
                         </li>
+            
                         <li class="nav-item">
-                            <a href="classroom.php" class="nav-link">
-                                <i class="nav-icon fas fa-light fa-school"></i>
+                            <a href="classroom.php" class="nav-link btnhover1">
+                                <i class="nav-icon fas fa-light fa-warehouse"></i>
                                 <p>
                                     Classrooms
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="teacher_list.php" class="nav-link">
+                            <a href="teacher_list.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p>
                                     Teachers
@@ -360,33 +325,33 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="#" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-calendar"></i>
                                 <p>
                                     Schedules
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview" style="background-color:#fff;">
+                            <ul class="nav nav-treeview ml-4" style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="" class="nav-link ">
-                                        <i class="far fa-circle nav-icon stu-list"></i>
-                                        <p class="stu-list">Teacher Schedule</p>
-                                    </a>
+                                        
+                                        <p class="stu-list text-white ml-2">Teacher Schedule</p>
+                                    </a> 
                                 </li>
                             </ul>
-                            <ul class="nav nav-treeview" style="background-color:#fff;">
+                            <ul class="nav nav-treeview ml-4" style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="class_for_sch.php" class="nav-link ">
-                                        <i class="far fa-circle nav-icon stu-list"></i>
-                                        <p class="stu-list">Student Schedule</p>
+                                        
+                                        <p class="stu-list text-white ml-2">Student Schedule</p>
                                     </a>
                                 </li>
                             </ul>
 
                         </li>
                         <li class="nav-item">
-                            <a href="report.php" class="nav-link">
+                            <a href="report.php" class="nav-link btnhover1">
                                 <i class="nav-icon fas fa-file"></i>
                                 <p>
                                     Reports
@@ -394,41 +359,35 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-ellipsis-h"></i>
+                            <a href="#" class="nav-link btnhover1">
+                                <i class="nav-icon fas fa-cogs"></i>
                                 <p>
                                     Setting
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-
-                            <ul class="nav nav-treeview" style="background-color:#fff;">
+                            <ul class="nav nav-treeview ml-4" style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
-                                    <a href="user_info.php" class="nav-link ">
-                                        <i class="far fa-circle nav-icon stu-list"></i>
-                                        <p class="stu-list">User Info</p>
+                                    <a href="user_info.php" class="nav-link"> 
+                                        <p class="stu-list text-white ml-2">User Info</p>
                                     </a>
                                 </li>
                             </ul>
-
-                            <ul class="nav nav-treeview" style="background-color:#fff;">
+                            <ul class="nav nav-treeview ml-4" style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
                                     <a href="" class="nav-link ">
-                                        <i class="far fa-circle nav-icon stu-list"></i>
-                                        <p class="stu-list">Backup</p>
+                                        <p class="stu-list text-white ml-2">Backup</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview ml-4 mb-5" style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
+                                <li class="nav-item">
+                                    <a href="logout.php" class="nav-link ">
+                                        <p class="stu-list text-white ml-2">Logout</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="logout.php" class="nav-link">
-                                <i class="nav-icon fas fa-file"></i>
-                                <p>
-                                    Logout
-                                </p>
-                            </a>
-                        </li>
-                        <?php endif; ?>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

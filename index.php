@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
     if (!isset($_SESSION['user'])) {
         // Redirect to login page or display an error message
-        header('Location: login_role.php');
+        header('Location: login-v2.php');
         exit;
     }
 }
@@ -25,7 +25,7 @@ if (session_status() === PHP_SESSION_NONE) {
             }
             ?> -->
     <!-- Content Header (Page header) -->
-    <?php var_dump($_SESSION['role']); ?>
+    <!-- <?php print_r($_COOKIE['Chamroeun']); ?> -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -54,7 +54,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">All Students</span>
+                            <span class="info-box-text">Total Students</span>
                             <span class="info-box-number">
                                 <?php
                                 $sql  = "SELECT ID FROM tb_student";
@@ -72,10 +72,10 @@ if (session_status() === PHP_SESSION_NONE) {
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user"></i></span>
+                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user-tie"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">All Teachers</span>
+                            <span class="info-box-text">Total Teachers</span>
                             <span class="info-box-number">
                                 <?php
                                 $sql  = "SELECT id FROM tb_teacher";
@@ -97,10 +97,10 @@ if (session_status() === PHP_SESSION_NONE) {
 
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-school"></i></span>
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-warehouse"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">All Class</span>
+                            <span class="info-box-text">Total Class</span>
                             <span class="info-box-number">
                                 <?php
                                 $sql  = "SELECT ClassID FROM tb_class";
@@ -118,10 +118,10 @@ if (session_status() === PHP_SESSION_NONE) {
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-graduation-cap"></i></span>
+                        <span class="info-box-icon bg-purple elevation-1 "><i class="fas fa-book"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">All Courses</span>
+                            <span class="info-box-text">Total Courses</span>
                             <span class="info-box-number">
                                 <?php
                                 $sql  = "SELECT id FROM tb_course";

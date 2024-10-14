@@ -118,15 +118,29 @@ $conn->close();
             }
         });
     </script>
+    <style>
+        .textcolor{
+                 color:#152550;
+                             }
+        .bgcolor{
+            background: #152550;
+        }
+    </style>
+    
 </head>
 
 <body class="hold-transition login-page">
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card">
-            <div class="card-header text-center">
-                <img src="images/SiSlogo.png" alt="" class="profile-user-img">
+            <div class="card-header text-center mt-3">
+                <img src="images/SiSlogo.png" alt="" class="profile-user-img" style="border:none;">
+                <div class="textcolor" style="font-family:Khmer OS Siemreap; font-size:16px; margin-bottom:-20px;">
+                   <p>ស្មាតប្រាយ អ៊ិនធើណាសិនណលស្គូល</p>
+                   <p style="margin-top:-15px;">Smartbright International School</p>
+                </div>
             </div>
+            
             <div class="card-body">
                 <form action="" method="post">
                     <input type="hidden" name="role" value="">
@@ -144,20 +158,19 @@ $conn->close();
                     <!-- <button type="button" class="btn btn-success toastsDefaultSuccess">
                         Launch Success Toast
                     </button> -->
-
-                    <div class="input-group mb-3">
-                        <input type="text" id="username" class="form-control" name="username" placeholder="Email">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
+                    
+                    <div class="input-group mb-3" >
+                        <input type="text" id="username" class="form-control" name="username" placeholder="Username" style="border-radius: 15px 0px 0px 15px;">
+                        <div class="input-group-append" >
+                        <div class="input-group-text bgcolor text-light" style="border-radius: 0px 15px 15px 0px;">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" id="password" name="password" class="form-control"
-                            placeholder="Password">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" style="border-radius: 15px 0px 0px 15px;">
                         <div class="input-group-append">
-                            <div class="input-group-text">
+                            <div class="input-group-text bgcolor text-light" style="border-radius: 0px 15px 15px 0px;">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
@@ -168,15 +181,15 @@ $conn->close();
                                 <input type="checkbox" id="remember" name="remember"
                                     <?= isset($_COOKIE['username']) ? 'checked' : '' ?>>
                                 <label for="remember">
-                                    <p>Remember Me</p>
+                                    Remember Me
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                     </div>
-                    <div class="mt-4 d-flex justify-content-center">
-                        <button type="submit" class="btn text-white px-4"
-                            style="background-color: #152550;">Login</button>
+                    <div class="mt-3 d-flex justify-content-center mb-4">
+                        <button type="submit" class="btn text-white px-4 bgcolor"
+                            style="border-radius:10px;">Login</button>
                     </div>
                     <!-- /.col -->
                 </form>
