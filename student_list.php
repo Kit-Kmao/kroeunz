@@ -35,11 +35,12 @@ if (isset($_POST['btnsave'])) {
     $file_name = $_FILES['image']['name'];
     $tempname = $_FILES['image']['tmp_name'];
     $folder = 'images/' . $file_name;
-    $sql = "INSERT INTO tb_student(Stu_code,En_name,Kh_name,DOB,Address,Dad_name,Mom_name,Dad_job,Mom_job,Phone,Profile_img,Status) 
-    VALUES(:stucode,:En_name, :Kh_name, :DOB, :Address, :Dad_name, :Mom_name, :Dad_job, :Mom_job, :Phone,:Profile_img,:Status)";
+    $sql = "INSERT INTO tb_student(Stu_code,En_name,Kh_name,Gender,DOB,Address,Dad_name,Mom_name,Dad_job,Mom_job,Phone,Profile_img,Status) 
+    VALUES(:stucode,:En_name, :Kh_name,:Gender, :DOB, :Address, :Dad_name, :Mom_name, :Dad_job, :Mom_job, :Phone,:Profile_img,:Status)";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":stucode", $_POST['studentcode'], PDO::PARAM_STR);
     $stmt->bindParam(":En_name", $_POST['en_name'], PDO::PARAM_STR);
+    $stmt->bindParam(":Gender", $_POST['gender'], PDO::PARAM_STR);
     $stmt->bindParam(":Kh_name", $_POST['kh_name'], PDO::PARAM_STR);
     $stmt->bindParam(":DOB", $_POST['dob'], PDO::PARAM_STR);
     $stmt->bindParam(":Address", $_POST['address'], PDO::PARAM_STR);
@@ -69,7 +70,7 @@ $temp = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $maxpage = 1;
 if ($temp) {
-    $maxpage = ceil($temp['CountRecords'] / 10);
+    $maxpage = ceil($temp['CountRecords'] / 5);
 }
 
 ?>
@@ -260,9 +261,9 @@ if ($temp) {
                                             echo ($key + 1);
                                         ?></td>
                                 <td>
-                                    <div class="user-panel">
-                                        <div class="image">
-                                            <img onerror="this.style.display = 'none'" class="img-circle"
+                                    <div class="user-panel p-0">
+                                        <div class="image p-0">
+                                            <img onerror="this.style.display = 'none'" class="img-circle p-0"
                                                 src="images/<?= $value['Profile_img']; ?>"
                                                 style="width: 35px; height: 35px;" />
                                         </div>

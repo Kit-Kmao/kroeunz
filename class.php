@@ -25,6 +25,11 @@ if (isset($_POST['btnsave'])) {
     $stmt->bindParam(":Stu_id", $_POST['addstu'], PDO::PARAM_STR);
     $stmt->bindParam(":Class_id", $_POST['addclass'], PDO::PARAM_STR);
     $stmt->execute();
+    if ($stmt->rowCount()) {
+        header('Location: student_in_class.php');
+    } else {
+        echo '<script>alert(Can not add data!)</script>';
+    }
 }
 
 
@@ -74,7 +79,10 @@ if ($temp) {
                                     </select>
 
                                     <div class="ml-3">
-                                        <input type="submit" value="Submit" name="btnsave" class="btn btn-success">
+                                        <!-- <input type="submit" value="Submit" name="btnsave" class="btn btn-success"> -->
+                                        <a class="btn btn-success" href="">
+                                            Submit
+                                        </a>
                                     </div>
                                 </div>
                             </div>
