@@ -174,6 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <p class="text-center">No students found for the selected class and month.</p>
                             </div>
                         <?php endif; ?>
+                        <!-- no students found for the selected -->
                     </div>
                 </div>
             </div>

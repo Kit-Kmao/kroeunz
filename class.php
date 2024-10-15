@@ -127,6 +127,7 @@ $maxpage = ceil($temp['CountRecords'] / 10);
                 </table>
             </div>
             </form>
+            <!-- this form table -->
         </div>
     </div>
 </section>
