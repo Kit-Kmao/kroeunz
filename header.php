@@ -1,5 +1,5 @@
 <?php
-include 'connection.php';  
+include 'connection.php';
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +82,7 @@ include 'connection.php';
                     <a class="nav-link " data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"
                             style="font-size:23px;"></i></a>
                 </li>
-                
+
             </ul>
 
             <!-- Right navbar links -->
@@ -206,7 +206,7 @@ include 'connection.php';
                             <ul class="nav nav-treeview ml-4"
                                 style="background-color:#5b6684; border-radius: 10px 0px 0px 10px;">
                                 <li class="nav-item">
-                                    <a href="student_in_class.php" class="nav-link">
+                                    <a href="Student_in_class.php" class="nav-link">
                                         <p class="stu-list text-white ml-2">Student in Class</p>
                                     </a>
                                 </li>

@@ -35,8 +35,11 @@ if (isset($_POST['btnsave'])) {
     $file_name = $_FILES['image']['name'];
     $tempname = $_FILES['image']['tmp_name'];
     $folder = 'images/' . $file_name;
-    $sql = "INSERT INTO tb_student(Stu_code,En_name,Kh_name,Gender,DOB,Address,Dad_name,Mom_name,Dad_job,Mom_job,Phone,Profile_img,Status) 
+    $sql = "INSERT INTO tb_student(Stu_code,En_name,Kh_name,Gender,DOB,Address,Dad_name,Mom_name,Dad_job,Mom_job,Phone,Profile_img,Status)
     VALUES(:stucode,:En_name, :Kh_name,:Gender, :DOB, :Address, :Dad_name, :Mom_name, :Dad_job, :Mom_job, :Phone,:Profile_img,:Status)";
+
+    $sql = "INSERT INTO tb_student(Stu_code,En_name,Kh_name,DOB,Address,Dad_name,Mom_name,Dad_job,Mom_job,Phone,Profile_img,Status)
+    VALUES(:stucode,:En_name, :Kh_name, :DOB, :Address, :Dad_name, :Mom_name, :Dad_job, :Mom_job, :Phone,:Profile_img,:Status)";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":stucode", $_POST['studentcode'], PDO::PARAM_STR);
     $stmt->bindParam(":En_name", $_POST['en_name'], PDO::PARAM_STR);

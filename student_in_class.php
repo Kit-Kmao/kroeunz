@@ -4,36 +4,40 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Handle student removal from class
+if (isset($_GET['remove_id']) && isset($_GET['class_id'])) {
+    $student_id = $_GET['remove_id'];
+    $class_id = $_GET['class_id'];
 
-// $sql = "SELECT * FROM tb_add_to_class atc JOIN tb_class c ON c.ClassID = atc.Class_id JOIN tb_student stu ON stu.ID = atc.Stu_id WHERE atc.id";
-// $stmt = $conn->prepare($sql);
-// $stmt->execute();
-// $class = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// if (isset($_POST['btnsave'])) {
-//     $id = $_POST['addtoclass'];
-$sql = "SELECT * FROM tb_add_to_class";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$addtoclass = $stmt->fetch(PDO::FETCH_ASSOC);
-// }
-
-$sql = "SELECT * FROM tb_class ";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$class = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-//pages
-$sql  = "SELECT COUNT(*) AS CountRecords FROM tb_add_to_class";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$temp = $stmt->fetch(PDO::FETCH_ASSOC);
-
-$maxpage = 1;
-if ($temp) {
-    $maxpage = ceil($temp['CountRecords'] / 10);
+    $remove_sql = "DELETE FROM tb_add_to_class WHERE Stu_id = :student_id AND Class_id = :class_id";
+    $stmt = $conn->prepare($remove_sql);
+    $stmt->bindParam(':student_id', $student_id, PDO::PARAM_INT);
+    $stmt->bindParam(':class_id', $class_id, PDO::PARAM_INT);
+    $stmt->execute();
 }
+
+// Fetch students assigned to the selected class
+if (isset($_POST['addclass'])) {
+    $class_id = $_POST['addclass'];
+
+    $sql = "SELECT stu.ID, stu.En_name, c.Class_name
+            FROM tb_student stu
+            JOIN tb_add_to_class atc ON stu.ID = atc.Stu_id
+            JOIN tb_class c ON c.ClassID = atc.Class_id
+            WHERE atc.Class_id = :class_id";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':class_id', $class_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $students_in_class = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Fetch all classes for the dropdown
+$sql = "SELECT * FROM tb_class";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$classes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <?php include_once 'header.php'; ?>
@@ -44,16 +48,11 @@ if ($temp) {
             <div class="col-sm-6">
                 <h3 class="m-0" style="font-family:Khmer OS Siemreap; color:#152550;">
                     |Student List
-                    <!-- <?php echo $_GET['cl_id'] ?> -->
-                </h3>
-            </div>
-            <div class="col-sm-6">
-                <h3 class="card-title float-sm-right">
-
                 </h3>
             </div>
         </div>
     </div>
+
     <!-- /.row -->
     <div class="row m-2">
         <div class="col-12">
@@ -66,8 +65,11 @@ if ($temp) {
                                     <div class="form-group">
                                         <select name="addclass" id="" class="form-control">
                                             <option value="">--Select Class--</option>
-                                            <?php foreach ($class as $row) : ?>
-                                            <option value="<?= $row['ClassID']; ?>"><?= $row['Class_name']; ?></option>
+                                            <?php foreach ($classes as $row) : ?>
+                                            <option value="<?= $row['ClassID']; ?>"
+                                                <?= isset($_POST['addclass']) && $_POST['addclass'] == $row['ClassID'] ? 'selected' : '' ?>>
+                                                <?= $row['Class_name']; ?>
+                                            </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -99,45 +101,30 @@ if ($temp) {
                             <th>No</th>
                             <th>Class Name</th>
                             <th>English Name</th>
-                            <!-- <th>Khmer Name</th>
-                            <th>Student Code</th>
-                            <th>Gender</th>
-                            <th>Date of Birth</th>
-                            <th>Action</th> -->
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="showdata">
-                        <!-- <?php if (isset($_POST['addtoclass'])) { ?> -->
-
-                        <!-- <?php if (isset($addtoclass)) { ?> -->
-                        <?php foreach ($addtoclass as $value) { ?>
+                        <!-- Show students already in the class -->
+                        <?php if (isset($students_in_class) && !empty($students_in_class)) { ?>
+                        <?php foreach ($students_in_class as $key => $student) { ?>
                         <tr>
-                            <td><?php
-                                            if (isset($_GET['page']) && $_GET['page'] > 1)
-                                                echo ($_GET['page'] - 1) * 10 + ($key + 1);
-                                            else
-                                                echo ($key + 1);
-                                    ?></td>
-
-                            <td><?php echo $value['Stu_id']; ?></td>
-                            <td><?php echo $value['Class_id']; ?></td>
-                            <!-- <td><?php echo $value['Stu_code']; ?></td>
-                            <td><?php echo $value['Gender']; ?></td>
-                            <td><?php echo $value['DOB']; ?></td> -->
-                            <!-- <td>
-                                <a class="m-2" href="all_condition.php?remove_cid=<?php echo $value['id'] ?>"
-                                    onclick="return confirm('Do you want to delete this record?')">
-                                    <i class="fa fa-trash text-danger"></i>
+                            <td><?= $key + 1; ?></td>
+                            <td><?= $student['Class_name']; ?></td>
+                            <td><?= $student['En_name']; ?></td>
+                            <td>
+                                <!-- Remove button to delete the student from the class -->
+                                <a href="?remove_id=<?= $student['ID']; ?>&class_id=<?= $class_id; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to remove this student?');">
+                                    Remove
                                 </a>
-                            </td> -->
+                            </td>
                         </tr>
                         <?php } ?>
-                        <!-- <?php } ?> -->
-                        <!-- <?php } else { ?>
+                        <?php } else { ?>
                         <tr>
-                            <td>No Record Found!</td>
+                            <td colspan="4">No students found for the selected class.</td>
                         </tr>
-                        <?php } ?> -->
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -146,6 +133,5 @@ if ($temp) {
     </div>
     <!-- /.row -->
 </section>
-
 
 <?php include_once 'footer.php'; ?>
